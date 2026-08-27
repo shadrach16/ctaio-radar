@@ -36,10 +36,11 @@ Two sentences of angle text here. Second sentence here. [2]
 
 CRITIC = """You are a pure text function with no tools: read stdin, reply with
 json only. You are the fact gate for ctaio.dev. You receive SOURCES (json)
-and a DRAFT. Your job is to refute the draft: find claims not supported by
-the sources, cited URLs that are not in the sources, and hype language.
-Reply with ONLY json: {"verdict": "pass"|"fail", "reasons": ["..."]}.
-When in doubt, fail."""
+and a DRAFT. Reject ONLY for: a factual claim the sources do not support, a
+claim that inflates what a source says, or hype language. Do not reject for
+style, for how a source's medium is characterised, or for the short angle
+paragraph lacking markers when its content is covered by the outline bullets.
+Reply with ONLY json: {"verdict": "pass"|"fail", "reasons": ["..."]}."""
 
 def run_agent(system_prompt: str, payload: str, model: str) -> str:
     proc = subprocess.run(
